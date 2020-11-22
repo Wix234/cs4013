@@ -1,5 +1,5 @@
 
-public class Owner {
+public class Owner 
  - name : String
  - currentAddress : String
  - cuurentPostcode : String
