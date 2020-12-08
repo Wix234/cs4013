@@ -1,8 +1,11 @@
+import java.util.ArrayList;
+
 public class Owner {
 
 	private String name;
 	private String currentAddress;
 	private String currentPostcode;
+	private ArrayList<Property> propertiesOwned = new ArrayList<Property>();
 
 	public Owner(String name1, String currentAddress1, String currentPostcode1) {
 		this.setName(name1);
@@ -32,5 +35,21 @@ public class Owner {
 
 	public void setCurrentPostcode(String currentPostcode) {
 		this.currentPostcode = currentPostcode;
+	}
+
+	public void addProperties(Property p) {
+		propertiesOwned.add(p);
+	}
+
+	public String getProperties() {
+		String properties = "\n";
+		for (int i = 0; i < propertiesOwned.size(); i++) {
+			properties = properties + "Property number " + (i + 1) + ":\n" + propertiesOwned.get(i).toString() + "\n";
+		}
+		return properties;
+	}
+
+	public String toString() {
+		return (name + ":\n" + "Current Address: " + currentAddress + "\nCurrent Postcode: " + currentPostcode);
 	}
 }
