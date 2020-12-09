@@ -1,3 +1,4 @@
+
 public class TestProperties {
 
 	public static void main(String[] args) {
@@ -12,11 +13,11 @@ public class TestProperties {
 		p2.addProperty("12 nah", "123", 123.0, 2, true, 2011);
 		p2.addProperty("13 nah", "123", 123.0, 2, true, 2011);
 		p2.addProperty("14 nah", "123", 123.0, 2, true, 2012);
-		System.out.println(p2.toString());
+		//System.out.println(p2.toString());
 		
-		//Property p = new Property("12 lol", "123", 123.0, 2, true, 2019);
-		//Tax t = new Tax();
 		p2.addTax();
+		System.out.println(p2.getTaxForYearX(2019));
+		System.out.println(p2.getTaxForPopertyX("11 nah"));
 		System.out.println(p2.toStringTaxes());
 	}
 }
