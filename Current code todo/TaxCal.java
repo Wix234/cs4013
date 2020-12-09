@@ -1,5 +1,4 @@
 
-
 public class TaxCal {
 	private double fixedTax = 100;
 	private double marketVal;
@@ -25,7 +24,6 @@ public class TaxCal {
 			}else if (marketVal > 650001){
 				taxMarketVal = (marketVal * 0.04);
 			}
-		
 		return taxMarketVal;
 	}
 	
@@ -46,6 +44,7 @@ public class TaxCal {
 	}
 	
 	public double residenceTax(){
+
 		double privateResTax;	
 		if (privateResidence == true){
 				privateResTax = 100;

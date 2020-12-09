@@ -1,6 +1,4 @@
 
-
-
 public class Property {
 	private String address;
 	private String eircode;
@@ -58,6 +56,7 @@ public class Property {
 		this.privateResidence = privateResidence;
 	}
 	
+
 	public int getYearBought() {
 		return yearBought;
 	}
@@ -86,8 +85,7 @@ public class Property {
 			temp2 = "Countryside";
 		}
 		return ("Address:\n" + address + "\n" + eircode + "\n\nEstimated market value: " + estMarketVal
+
 				+ "\nLocation type: " + temp2 + "\nYear Bought:  " + yearBought + "\nPrinciple private Residence: " + temp + "\n\n");
 	}
-	
 }
-
