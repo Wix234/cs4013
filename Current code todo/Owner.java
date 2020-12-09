@@ -41,12 +41,26 @@ public class Owner {
 		propertiesOwned.add(p);
 	}
 
+	public void removeProperties(Property p) {
+		int index = 0;
+		for (int i = 0; i <= propertiesOwned.size(); i++) {
+			if (p == propertiesOwned.get(i)) {
+				index = i;
+			}
+		}
+		propertiesOwned.remove(index);
+	}
+
 	public String getProperties() {
 		String properties = "\n";
 		for (int i = 0; i < propertiesOwned.size(); i++) {
 			properties = properties + "Property number " + (i + 1) + ":\n" + propertiesOwned.get(i).toString() + "\n";
 		}
 		return properties;
+	}
+
+	public String getAllDetails() {
+		return toString() + getProperties();
 	}
 
 	public String toString() {
