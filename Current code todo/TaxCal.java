@@ -1,72 +1,68 @@
 
-import java.util.ArrayList;
-
 public class TaxCal {
-	private ArrayList<Property> properties;
 	private double fixedTax = 100;
-	private double taxMarketVal;
-	private double taxLocation;
-	private double privateResidence;
+	private double marketVal;
+	private double location;
+	private boolean privateResidence;
+	private double totalTax;
+	
 	
 	public TaxCal(Property p){
-		properties = new ArrayList<Property>();
-		properties.add(p);
+		marketVal = p.getEstMarketVal();
+		location = p.getLocation();
+		privateResidence = p.isPrivateResidence();
 	}
-	
-	public void addProperty(Property p){
-		properties.add(p);
-	}
-	
+
 	public double estMarketValTax(){
-		Property p;
-		for(int i = 0; i < properties.size(); i++){
-			p = properties.get(i);
-			if(p.getEstMarketVal() < 150000){
+		double taxMarketVal = 0;
+		if(marketVal < 150000){
 				taxMarketVal = 0;
-			}else if (p.getEstMarketVal() >= 150000 && p.getEstMarketVal() <= 400000){
-				taxMarketVal = (p.getEstMarketVal() * 0.01);
-			}else if (p.getEstMarketVal() >= 400001 && p.getEstMarketVal() <= 650000){
-				taxMarketVal = (p.getEstMarketVal() * 0.02);
-			}else if (p.getEstMarketVal() > 650001){
-				taxMarketVal = (p.getEstMarketVal() * 0.04);
+			}else if (marketVal >= 150000 && marketVal <= 400000){
+				taxMarketVal = (marketVal * 0.01);
+			}else if (marketVal >= 400001 && marketVal <= 650000){
+				taxMarketVal = (marketVal * 0.02);
+			}else if (marketVal > 650001){
+				taxMarketVal = (marketVal * 0.04);
 			}
-		}
 		return taxMarketVal;
 	}
 	
 	public double taxLocation(){
-		Property p;
-		for(int i = 0; i < properties.size(); i++){
-			p = properties.get(i);
-			if(p.getLocation() == 1){
+		double taxLocation = 0;	
+		if(location == 1){
 				taxLocation = 100;
-			}else if(p.getLocation() == 2){
+			}else if(location == 2){
 				taxLocation = 80;
-			}else if(p.getLocation() == 3){
+			}else if(location == 3){
 				taxLocation = 60;
-			}else if(p.getLocation() == 4){
+			}else if(location == 4){
 				taxLocation = 50;
-			}else if(p.getLocation() == 5){
+			}else if(location == 5){
 				taxLocation = 25;
 			}
-		}
 		return taxLocation;
 	}
 	
 	public double residenceTax(){
-		Property p;
-		for(int i = 0; i < properties.size(); i++){
-			p = properties.get(i);
-			if (p.isPrivateResidence() == true){
-				privateResidence = 100;
+
+		double privateResTax;	
+		if (privateResidence == true){
+				privateResTax = 100;
 			}else {
-				privateResidence = 0;
+				privateResTax = 0;
 			}	
-		}
-		return privateResidence;
+		
+		return privateResTax;
 	}
 	
-	public String totalTax(){
-		return ("\nFT:" + fixedTax  + "\nMT:" + taxMarketVal + "\nTL:" + taxLocation + "\nPR:" + privateResidence);
+	public double getTotalTax(Property p){
+		totalTax = (fixedTax + taxLocation() + estMarketValTax()  + residenceTax());
+		return totalTax;
 	}
+	
+	
+	public String taxInformation(){
+		return ("FT:" + fixedTax  + " | MT:" + marketVal + " | TL:" + location + " | PR:" + privateResidence);
+	}
+	
 }

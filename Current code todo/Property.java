@@ -1,16 +1,19 @@
+
 public class Property {
 	private String address;
 	private String eircode;
 	private double estMarketVal;
 	private int location;
 	private boolean privateResidence;
+	private int yearBought;
 	
-	public Property(String address, String eircode, double estMarketVal,int location, boolean privateResidence){
+	public Property(String address, String eircode, double estMarketVal,int location, boolean privateResidence, int yearBought){
 		setAddress(address);
 		setEircode(eircode);
 		setEstMarketVal(estMarketVal);
 		setLocation(location); 
 		setPrivateResidence(privateResidence);
+		setYearBought(yearBought);
 	}
 	
 	public String getAddress() {
@@ -53,6 +56,15 @@ public class Property {
 		this.privateResidence = privateResidence;
 	}
 	
+
+	public int getYearBought() {
+		return yearBought;
+	}
+
+	public void setYearBought(int yearBought) {
+		this.yearBought = yearBought;
+	}
+	
 	public String toString(){
 		String temp;
 		if (privateResidence == true){
@@ -73,5 +85,7 @@ public class Property {
 			temp2 = "Countryside";
 		}
 		return ("Address:\n" + address + "\n" + eircode + "\n\nEstimated market value: " + estMarketVal
-				+ "\nLocation type: " + temp2 + "\nPrinciple private Residence: " + temp);
+
+				+ "\nLocation type: " + temp2 + "\nYear Bought:  " + yearBought + "\nPrinciple private Residence: " + temp + "\n\n");
 	}
+}
