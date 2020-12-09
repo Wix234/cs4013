@@ -55,5 +55,4 @@ public class Tax {
 		return ("Name : " + name + " Year : " + year + taxInfo + " Total tax " + total + " Paid : " +  paid + 
 				"\n" ).replace("[", "").replace("]", "").replace(",", "");
 	}
-	
 }
