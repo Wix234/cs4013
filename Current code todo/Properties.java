@@ -1,9 +1,11 @@
+import java.time.Year;
 import java.util.ArrayList;
 
 public class Properties {
 	public String ownerName;//temp so i can test it
 	private ArrayList<Property> properties = new ArrayList<Property>();
 	private ArrayList<Tax> taxes = new ArrayList<Tax>();
+	private int curYear = Year.now().getValue();
 	public Properties(String name){
 		this.ownerName = name;
 	}
@@ -42,13 +44,33 @@ public class Properties {
 	public void addTax() {
 		for(int i = 0; i <properties.size(); i ++) {
 			Property p = properties.get(i);
-			TaxCal tax = new TaxCal(p);
-			Tax taxed = new Tax(tax.taxInformation(), tax.getTotalTax(p));
-			taxes.add(taxed);
+			int yearsOwned = curYear- p.getYearBought();
+			for (int j = 0; j < yearsOwned; j++) {
+				TaxCal tax = new TaxCal(p);
+				Tax taxed = new Tax(p, (p.getYearBought() + j), tax.taxInformation(), tax.getTotalTax(p), true);
+				taxes.add(taxed);
+			}
 		}
 	}
-	
+	public String getTaxForYearX(int year) {
+		ArrayList<Tax> temp = new ArrayList<Tax>();
+		for (int i = 0; i < taxes.size(); i++) {
+			if (year == taxes.get(i).getYear()) {
+				temp.add(taxes.get(i));
+			}
+		}
+		return (temp.toString()).replace("[", "").replace("]", "").replace(",", "");
+	}
+	public String getTaxForPopertyX(String name) {
+		ArrayList<Tax> temp = new ArrayList<Tax>();
+		for (int i = 0; i < taxes.size(); i++) {
+			if (name == taxes.get(i).getName()) {
+				temp.add(taxes.get(i));
+			}
+		}
+		return (temp.toString()).replace("[", "").replace("]", "").replace(",", "");
+	}
 	public String toStringTaxes() {
-		return ("Properties\n " + taxes + "\n");
+		return ("Properties\n " + taxes + "\n").replace("[", "").replace("]", "").replace(",", "");
 	}
 }
