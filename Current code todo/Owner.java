@@ -43,7 +43,7 @@ public class Owner {
 
 	public void removeProperties(Property p) {
 		int index = 0;
-		for (int i = 0; i <= propertiesOwned.size(); i++) {
+		for (int i = 0; i < propertiesOwned.size(); i++) {
 			if (p == propertiesOwned.get(i)) {
 				index = i;
 			}
@@ -59,6 +59,10 @@ public class Owner {
 		return properties;
 	}
 
+	public ArrayList<Property> getPropertiesArray() {
+		return propertiesOwned;
+	}
+
 	public String getAllDetails() {
 		return toString() + getProperties();
 	}
@@ -67,3 +71,4 @@ public class Owner {
 		return (name + ":\n" + "Current Address: " + currentAddress + "\nCurrent Postcode: " + currentPostcode);
 	}
 }
+
