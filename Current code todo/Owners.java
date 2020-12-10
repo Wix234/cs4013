@@ -18,34 +18,38 @@ public class Owners {
 
 	private ArrayList<Owner> ownerDetails = new ArrayList<Owner>();
 
-	public String ownersProperties;
+	public String ownersProperties = "";
 
 	public String getOwnersProperties() {
-		for (int i = 0; i <= ownerDetails.size(); i++) {
+		for (int i = 0; i < ownerDetails.size(); i++) {
 			Owner o = ownerDetails.get(i);
-			ownersProperties = ownersProperties + (o.getAllDetails());
+			ownersProperties = ownersProperties + ("\n" + (i + 1) + ")\n" + o.getAllDetails());
 		}
 		return ownersProperties;
 	}
 
 	public void addOwner(Owner o) {
 		boolean contains = false;
-		for (int i = 0; i <= ownerDetails.size(); i++) {
+		for (int i = 0; i < ownerDetails.size(); i++) {
 			if (o == ownerDetails.get(i)) {
 				contains = true;
 			}
 		}
-		if (contains = false) {
+		if (contains == false) {
 			ownerDetails.add(o);
 		}
 	}
 
 	public void removeOwner(Owner o) {
-		for (int i = 0; i <= ownerDetails.size(); i++) {
+		for (int i = 0; i < ownerDetails.size(); i++) {
 			if (o == ownerDetails.get(i)) {
 				ownerDetails.remove(i);
 			}
 		}
+	}
+
+	public ArrayList<Owner> getOwnerDetails() {
+		return ownerDetails;
 	}
 
 }
