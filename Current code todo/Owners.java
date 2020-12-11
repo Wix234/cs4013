@@ -17,47 +17,39 @@ public class Owners {
 	 */
 
 	private ArrayList<Owner> ownerDetails = new ArrayList<Owner>();
-	private ArrayList<Tax> taxPaid = new ArrayList<Tax>();
-	private ArrayList<Tax> taxDue = new ArrayList<Tax>();
 
-	public String ownersProperties;
-	public double ownersPaidTax;
-	public double ownersTaxProperty;
-	public double ownersDueTax;
+	public String ownersProperties = "";
 
-	public static String getOwnersProperties(Owner o) {
-		return (o.toString() + o.getProperties());
+	public String getOwnersProperties() {
+		for (int i = 0; i < ownerDetails.size(); i++) {
+			Owner o = ownerDetails.get(i);
+			ownersProperties = ownersProperties + ("\n" + (i + 1) + ")\n" + o.getAllDetails());
+		}
+		return ownersProperties;
 	}
 
-	public void setOwnersPaidTax(Property p){
-		ownersPaidTax = 0;
-		for (int i = 0; i < taxPaid.size(); i++){
-			ownersPaidTax = ownersPaidTax + taxPaid.get(i)./**need to know what return value is called*/;
+	public void addOwner(Owner o) {
+		boolean contains = false;
+		for (int i = 0; i < ownerDetails.size(); i++) {
+			if (o == ownerDetails.get(i)) {
+				contains = true;
+			}
+		}
+		if (contains == false) {
+			ownerDetails.add(o);
+		}
+	}
+
+	public void removeOwner(Owner o) {
+		for (int i = 0; i < ownerDetails.size(); i++) {
+			if (o == ownerDetails.get(i)) {
+				ownerDetails.remove(i);
+			}
 		}
 	}
 
 	public ArrayList<Owner> getOwnerDetails() {
 		return ownerDetails;
-	}
-
-	public void addOwnerDetails(Owner o) {
-		ownerDetails.add(o);
-	}
-
-	public ArrayList<Tax> getTaxPaid() {
-		return taxPaid;
-	}
-
-	public void setTaxPaid(ArrayList<Tax> taxPaid) {
-		this.taxPaid = taxPaid;
-	}
-
-	public ArrayList<Tax> getTaxDue() {
-		return taxDue;
-	}
-
-	public void setTaxDue(ArrayList<Tax> taxDue) {
-		this.taxDue = taxDue;
 	}
 
 }

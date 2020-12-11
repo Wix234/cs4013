@@ -41,6 +41,16 @@ public class Owner {
 		propertiesOwned.add(p);
 	}
 
+	public void removeProperties(Property p) {
+		int index = 0;
+		for (int i = 0; i < propertiesOwned.size(); i++) {
+			if (p == propertiesOwned.get(i)) {
+				index = i;
+			}
+		}
+		propertiesOwned.remove(index);
+	}
+
 	public String getProperties() {
 		String properties = "\n";
 		for (int i = 0; i < propertiesOwned.size(); i++) {
@@ -49,7 +59,16 @@ public class Owner {
 		return properties;
 	}
 
+	public ArrayList<Property> getPropertiesArray() {
+		return propertiesOwned;
+	}
+
+	public String getAllDetails() {
+		return toString() + getProperties();
+	}
+
 	public String toString() {
 		return (name + ":\n" + "Current Address: " + currentAddress + "\nCurrent Postcode: " + currentPostcode);
 	}
 }
+
