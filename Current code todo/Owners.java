@@ -16,40 +16,43 @@ public class Owners {
 	 * owns and any overdue tax as well
 	 */
 
-	private ArrayList<Owner> ownerDetails = new ArrayList<Owner>();
-
-	public String ownersProperties = "";
-
-	public String getOwnersProperties() {
-		for (int i = 0; i < ownerDetails.size(); i++) {
-			Owner o = ownerDetails.get(i);
-			ownersProperties = ownersProperties + ("\n" + (i + 1) + ")\n" + o.getAllDetails());
-		}
-		return ownersProperties;
+	private ArrayList<Owner> ownerDetails;
+	public Owners(){
+		ownerDetails = new ArrayList<Owner>();
 	}
-
-	public void addOwner(Owner o) {
-		boolean contains = false;
-		for (int i = 0; i < ownerDetails.size(); i++) {
-			if (o == ownerDetails.get(i)) {
-				contains = true;
+	
+	public void addOwner(Owner o){
+		boolean exists = false;
+		for (int i = 0; i <ownerDetails.size(); i++){
+			if (ownerDetails.get(i) == o){
+				exists = true;
 			}
 		}
-		if (contains == false) {
+		if (exists == false){
 			ownerDetails.add(o);
 		}
+		
 	}
-
-	public void removeOwner(Owner o) {
-		for (int i = 0; i < ownerDetails.size(); i++) {
-			if (o == ownerDetails.get(i)) {
+	public String getOwner(String name){
+		String temp = null;
+		for (int i = 0; i <ownerDetails.size(); i++){
+			if (ownerDetails.get(i).getName() ==name){
+				temp = ownerDetails.get(i).toString();
+			}
+		}
+		return temp;
+	}
+	
+	public void removeOwner(Owner o){
+		for (int i = 0; i <ownerDetails.size(); i++){
+			if (ownerDetails.get(i) == o){
 				ownerDetails.remove(i);
 			}
 		}
 	}
-
-	public ArrayList<Owner> getOwnerDetails() {
-		return ownerDetails;
+	
+	public String toString(){
+		return(ownerDetails.toString()).replace("[", "").replace("]", "").replace(",", "");
 	}
 
 }
