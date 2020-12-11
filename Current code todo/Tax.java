@@ -1,34 +1,28 @@
-public class Tax {
-	private String taxInfo;
-	private double total;
+public class Tax{
 	private int year;
 	private boolean paid;
-	private String name;
-	
-	public Tax() {
-	}
-	public Tax(Property p,int year, String info, double total, boolean paid) {
-		name = p.getAddress();
-		setTaxInfo(info);
-		setTotal(total);
+	private int yearPaid;
+	private Property p;
+	public Tax(int year) {
 		setYear(year);
-		setPaid(paid);
+		//setPaid(null);
+		setP(null);
+		setYearPaid(0);
 	}
-	
-	public String getTaxInfo() {
-		return taxInfo;
+	public Tax(Property p, int year) {
+		setYear(year);
+		setPaid(false);
+		setP(p);
 	}
-
-	public void setTaxInfo(String taxInfo) {
-		this.taxInfo = taxInfo;
-	}
-
-	public double getTotal() {
-		return total;
-	}
-
-	public void setTotal(double total) {
-		this.total = total;
+	public Tax(Property p,int year, int yearPaid) {
+		setYear(year);
+		if (yearPaid == 0) {
+			setPaid(false);
+		}else {
+			setPaid(true);
+		}
+		setP(p);
+		setYearPaid(yearPaid);
 	}
 
 	public int getYear() {
@@ -43,16 +37,25 @@ public class Tax {
 	public void setPaid(boolean paid) {
 		this.paid = paid;
 	}
-	public String getName() {
-		return name;
+	public Property getP() {
+		return p;
 	}
-	public String taxInfo(Property p) {
-		TaxCal tax = new TaxCal(p);
-		return (tax.taxInformation() + " | Total tax is:" + tax.getTotalTax(p));
+	public void setP(Property p) {
+		this.p = p;
+	}
+	public int getYearPaid() {
+		return yearPaid;
+	}
+	public void setYearPaid(int yearPaid) {
+		this.yearPaid = yearPaid;
 	}
 	
-	public String toString() {
-		return ("Name : " + name + " Year : " + year + taxInfo + " Total tax " + total + " Paid : " +  paid + 
-				"\n" ).replace("[", "").replace("]", "").replace(",", "");
+	public String getTaxInfo() {
+		TaxCal t = new TaxCal(p, year, paid, yearPaid);
+		return t.getTotalTax(p);
 	}
+	public String toString() {
+		return ("| Year : " + year +" | Paid: " + paid + " | Year Paid : " + yearPaid + " | Tax information: " + getTaxInfo() + "\n");
+	}
+	
 }
