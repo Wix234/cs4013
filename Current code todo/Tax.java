@@ -1,8 +1,10 @@
+
 public class Tax{
 	private int year;
 	private boolean paid;
 	private int yearPaid;
 	private Property p;
+	
 	public Tax(int year) {
 		setYear(year);
 		//setPaid(null);
@@ -52,10 +54,10 @@ public class Tax{
 	
 	public String getTaxInfo() {
 		TaxCal t = new TaxCal(p, year, paid, yearPaid);
-		return t.getTotalTax(p);
+		return t.getTotalTax(p); 
 	}
 	public String toString() {
-		return ("| Year : " + year +" | Paid: " + paid + " | Year Paid : " + yearPaid + " | Tax information: " + getTaxInfo() + "\n");
+		return ("| Year : " + year +" | Paid: " + paid + " | Year Paid : " + yearPaid + " | Tax information: " + getTaxInfo() + "\n").replace("[", "").replace("]", "").replace(",", "");
 	}
 	
 }
