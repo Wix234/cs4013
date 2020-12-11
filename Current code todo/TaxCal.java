@@ -108,7 +108,7 @@ public class TaxCal {
 		String str;
 		if (p != null) {
 			str = ("FT:" + fixedTax  + " | MT:" + estMarketValTax() + " | TL:" + taxLocation() + " | PR:" + residenceTax() + " | Overdue : "
-				+ temp + " | Total tax: " + totalTax);
+				+ temp + " | Total tax: " + totalTax).replace("[", "").replace("]", "").replace(",", "");
 		}else {
 			str = "Missing information on cvs sheet.";
 		}
