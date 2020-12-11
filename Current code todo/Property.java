@@ -1,6 +1,5 @@
 
 
-
 import java.time.Year;
 import java.util.ArrayList;
 
@@ -129,7 +128,7 @@ public class Property{
 			}
 			return ("Address:\n" + address + "\n" + eircode + "\nEstimated market value: " + estMarketVal
 					+ "\nLocation type: " + temp2 + "\nPrinciple private Residence: " + temp + "\nYear Bought: "  
-					+ yearBought + "\n\nTax Information:\n" + taxes + "\n");
+					+ yearBought + "\n\nTax Information:\n" + taxes + "\n").replace("[", "").replace("]", "").replace(",", "");
 		}
 
 		

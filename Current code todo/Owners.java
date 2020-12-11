@@ -1,6 +1,9 @@
+
 import java.util.ArrayList;
 
-// The main purpose of this class is to return the 
+
+
+//The main purpose of this class is to return the 
 public class Owners {
 	/**
 	 * + ownersProperties //returns the details of the owner as well as all the
@@ -15,8 +18,8 @@ public class Owners {
 	 * +ownersDueTax // this returns what tax is due on which property the owner
 	 * owns and any overdue tax as well
 	 */
-
 	private ArrayList<Owner> ownerDetails;
+	public String ownersProperties = "";
 	public Owners(){
 		ownerDetails = new ArrayList<Owner>();
 	}
@@ -51,8 +54,20 @@ public class Owners {
 		}
 	}
 	
+	public String getOwnersProperties() {
+		for (int i = 0; i < ownerDetails.size(); i++) {
+			Owner o = ownerDetails.get(i);
+			ownersProperties = ownersProperties + ("\n\n" + (i + 1) + ")" + o.getAllDetails());
+		}
+		return ownersProperties;
+	}
+	
+	public ArrayList<Owner> getOwnerDetails() {
+		return ownerDetails;
+	}
+	
 	public String toString(){
 		return(ownerDetails.toString()).replace("[", "").replace("]", "").replace(",", "");
 	}
-
+		
 }

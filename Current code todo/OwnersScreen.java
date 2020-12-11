@@ -12,7 +12,7 @@ public class OwnersScreen {
 		boolean more = true;
 
 		while (more) {
-			System.out.println("1) Show Owners \n2) Show Specific Owner Details \n3) Add Owner 4) Remove Owner \n");
+			System.out.println("1) Show All Owners and their properties \n2) Show Specific Owner Details \n3) Add Owner 4) Remove Owner \n");
 			String command = in.nextLine().toUpperCase();
 
 			if (command.equals("1")) {
@@ -22,9 +22,10 @@ public class OwnersScreen {
 				System.out.println(machine.getOwnersProperties());
 			} else if (command.equals("2")) {
 				/** Shows list of owners to pick */
-				System.out.println("Pick which Owner:\n");
+				System.out.println("\nPick which Owners Details and Properties to see:");
 				for (int i = 0; i < machine.getOwnerDetails().size(); i++) {
-					System.out.println((i + 1) + ") " + machine.getOwnerDetails().get(i));
+					//changed it so it just prints out the name of the owner rather than all the details so it doesn't take up too much space
+					System.out.println((i + 1) + ") " + machine.getOwnerDetails().get(i).getName());
 				}
 				int choice = in.nextInt();
 				Owner ownerPicked = machine.getOwnerDetails().get(choice - 1);
@@ -32,36 +33,43 @@ public class OwnersScreen {
 				 * Owner has been picked Now show details and properties of that
 				 * owner
 				 */
-				System.out.println(ownerPicked.getAllDetails());
+				System.out.println(ownerPicked.getProperties());
 				boolean more2 = true;
 				while (more2) {
 					System.out.println("\n1) Add Property \n2) Remove Property \n3) Go back");
 					String propertyScreenChoice = in.nextLine().toUpperCase();
 
 					if (propertyScreenChoice.equals("1")) {
+						//added in the new values needed to make a property
+						System.out.println("What's the Owner's name: ");
+						String name = in.nextLine().toUpperCase();
+						
 						System.out.println("What's the address: ");
 						String address = in.nextLine().toUpperCase();
+						//changed this to be called eircode
+						System.out.println("What's the Eircode: ");
+						String eircode = in.nextLine().toUpperCase();
 
-						System.out.println("What's the pincode: ");
-						String pincode = in.nextLine().toUpperCase();
+						System.out.println("What's the location. City, Large town, Small town, Village, Countryside: ");
+						String location = in.nextLine().toUpperCase();
 
+						System.out.println("It is a private residence. Yes or No: ");
+						String privateResidence = in.nextLine().toUpperCase();
+						
 						System.out.println("What's the estMarketVal: ");
 						double estMarketVal = in.nextDouble();
+						
+						System.out.println("What's the year bought: ");
+						int yearBought = in.nextInt();
 
-						System.out.println("What's the location: ");
-						int location = in.nextInt();
+						Property p = new Property(name, address, eircode, estMarketVal, location, privateResidence, yearBought);
 
-						System.out.println("It is a private residence. True or False: ");
-						boolean privateResidence = in.nextBoolean();
-
-						Property p = new Property(address, pincode, estMarketVal, location, privateResidence);
-
-						ownerPicked.addProperties(p);
+						ownerPicked.addProperty(p);
 
 					} else if (propertyScreenChoice.equals("2")) {
 						System.out.println("Which property are you removing?\n" + ownerPicked.getProperties());
 						int propertyToRemove = in.nextInt();
-						ownerPicked.removeProperties(ownerPicked.getPropertiesArray().get(propertyToRemove - 1));
+						ownerPicked.removeProperty(ownerPicked.getPropertiesArray().get(propertyToRemove - 1));
 					} else if (propertyScreenChoice.equals("3")) {
 						more2 = false;
 					} else {

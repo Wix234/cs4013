@@ -34,7 +34,7 @@ public class Owner{
 	public void setCurrentPostcode(String currentPostcode) {
 		this.currentPostcode = currentPostcode;
 	}
-	
+	//changed name from addPoperties to addProperty
 	public void addProperty(Property p) {
 		boolean contains = false;
 		for (int i = 0; i <propertiesOwned.size(); i++){
@@ -46,12 +46,17 @@ public class Owner{
 			propertiesOwned.add(p);
 		}
 	}
-	
-	public void removeProperty(String address) {
+	//changed name from removePoperties to removeProperty
+	public void removeProperty(Property p) {
 		for (int i = 0; i < propertiesOwned.size(); i++) {
-			if (propertiesOwned.get(i).getAddress() == address) {
+			if (propertiesOwned.get(i) == p) {
 				propertiesOwned.remove(i);			}
 		}
+	}
+	
+	public void removeProperties() {
+		for (int i = 0; i < propertiesOwned.size(); i++) {
+				propertiesOwned.remove(i);			}
 	}
 	
 	public String getProperty(String address){
@@ -63,15 +68,26 @@ public class Owner{
 		}
 		return temp;
 	}
-	
+	//returns all properties owned by an owner and the tax on them
+	public String getProperties() {
+		String properties = "\n";
+		for (int i = 0; i < propertiesOwned.size(); i++) {
+			properties = properties + "Property number " + (i + 1) + ":\n" + propertiesOwned.get(i).toString() + "\n";
+		}
+		return properties;
+	}
 	public ArrayList<Property> getPropertiesArray() {
 		return propertiesOwned;
 	}
 	
 	public String getAllDetails() {
-		return toString();
+		return ownerToString();
 	}
-	
+	//returns just owners details to string used to be called toString
+	public String ownerToString() {
+		return (name + ":\n" + "Current Address: " + currentAddress + "\nCurrent Postcode: " + currentPostcode);
+	}
+	//returns owners details all their property details and all the tax info on each property
 	public String toString() {
 		return ("Name: " + name + "\nCurrent address: " + currentAddress + "\nEircode: " + currentPostcode + "\n\n" 
 	+ propertiesOwned.toString()).replace("[", "").replace("]", "").replace(",", "");
