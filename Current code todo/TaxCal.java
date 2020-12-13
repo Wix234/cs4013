@@ -2,6 +2,7 @@
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.Year;
+
 public class TaxCal {
 	private double fixedTax = 100;
 	private double marketVal;
@@ -87,6 +88,26 @@ public class TaxCal {
 		
 		return privateResTax;
 	}
+	//new method
+	public double totalTax(Property p){
+		double temp = (fixedTax + taxLocation() + estMarketValTax()  + residenceTax());
+		totalTax = (fixedTax + taxLocation() + estMarketValTax()  + residenceTax());
+		int count = 0;
+		if (yearPaid == 0 && p != null) {
+			count = curYear - year;
+		}else {
+			count = yearPaid - year;
+		}
+		for (int i = 0; i < count; i++){
+			totalTax = totalTax + (totalTax * 0.07);
+		}
+		BigDecimal twoPoints1 = new BigDecimal(totalTax).setScale(2, RoundingMode.HALF_UP);
+		totalTax = twoPoints1.doubleValue();
+		temp = totalTax - temp;
+		BigDecimal twoPoints2 = new BigDecimal(temp).setScale(2, RoundingMode.HALF_UP);
+		temp = twoPoints2.doubleValue();
+		return totalTax;
+	}
 	
 	public String getTotalTax(Property p){
 		double temp = (fixedTax + taxLocation() + estMarketValTax()  + residenceTax());
@@ -106,6 +127,8 @@ public class TaxCal {
 		BigDecimal twoPoints2 = new BigDecimal(temp).setScale(2, RoundingMode.HALF_UP);
 		temp = twoPoints2.doubleValue();
 		String str;
+		
+		
 		if (p != null) {
 			str = ("FT:" + fixedTax  + " | MT:" + estMarketValTax() + " | TL:" + taxLocation() + " | PR:" + residenceTax() + " | Overdue : "
 				+ temp + " | Total tax: " + totalTax).replace("[", "").replace("]", "").replace(",", "");
@@ -114,4 +137,3 @@ public class TaxCal {
 		}
 		return str;
 	}
-}

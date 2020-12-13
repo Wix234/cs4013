@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 public class Owner{
@@ -63,10 +64,21 @@ public class Owner{
 		String temp = null;
 		for (int i = 0; i < propertiesOwned.size(); i++) {
 			if (propertiesOwned.get(i).getAddress() == address) {
-				temp = propertiesOwned.get(i).toString();
+				temp = propertiesOwned.get(i).PropertywithTaxToString();
 			}
 		}
 		return temp;
+	}
+	public String taxesPaidYear(int year){
+		ArrayList<Tax> temp = new ArrayList<Tax>();
+		for (int i = 0; i <propertiesOwned.size(); i++){
+			for (int j = 0; j < propertiesOwned.get(i).getTaxesPaid().size(); j++){
+				if(propertiesOwned.get(i).getTaxesPaid().get(j).getYear() == year){
+					temp.add(propertiesOwned.get(i).getTaxesPaid().get(j));
+				}
+			}
+		}
+		return (temp.toString()).replace("[", "").replace("]", "").replace(",", "");
 	}
 	//returns all properties owned by an owner and the tax on them
 	public String getProperties() {
@@ -76,9 +88,17 @@ public class Owner{
 		}
 		return properties;
 	}
+	public String getPropertiesWithTax() {
+		String properties = "\n";
+		for (int i = 0; i < propertiesOwned.size(); i++) {
+			properties = properties + "Property number " + (i + 1) + ":\n" + propertiesOwned.get(i).PropertywithTaxToString() + "\n";
+		}
+		return properties;
+	}
 	public ArrayList<Property> getPropertiesArray() {
 		return propertiesOwned;
 	}
+	
 	
 	public String getAllDetails() {
 		return ownerToString();
