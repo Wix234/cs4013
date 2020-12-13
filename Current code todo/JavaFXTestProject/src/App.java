@@ -324,7 +324,7 @@ public class App extends Application {
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 10));
         grid.add(scenetitle, 0, 0, 2, 1);
 
-        Label propertyView = new Label("View a Property");
+        Label propertyView = new Label("View a Property's tax info");
         grid.add(propertyView, 0, 1);
 
         Button propsbtn  = new Button("View");
@@ -341,7 +341,7 @@ public class App extends Application {
                 singlePropertyScreen();
             }
         });
-        Label ownerView = new Label("View an owner");
+        Label ownerView = new Label("View tax info of an owner");
         grid.add(ownerView, 0, 3);
 
         Button ownbtn  = new Button("View");
@@ -531,6 +531,24 @@ public class App extends Application {
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 10));
         grid.add(scenetitle, 0, 0, 2, 1);
         
+
+        Button viewbtn  = new Button("View");
+        viewbtn.setPrefSize(60, 20);
+        HBox viewhb = new HBox(10);
+        viewhb.setAlignment(Pos.CENTER);
+        viewhb.getChildren().add(viewbtn);
+        grid.add(viewhb, 0, 1);
+
+        viewbtn.setOnAction(new EventHandler<ActionEvent>() { 
+            @Override
+            public void handle(ActionEvent e) {
+                ((Node)(e.getSource())).getScene().getWindow().hide();
+                pickProperties();
+            }
+        
+        });
+
+
         Button backbtn  = new Button("Back");
         backbtn.setPrefSize(60, 20);
         HBox backhb = new HBox(10);
@@ -566,6 +584,22 @@ public class App extends Application {
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 10));
         grid.add(scenetitle, 0, 0, 2, 1);
         
+        Button firstbtn  = new Button("Shane");
+        firstbtn.setPrefSize(60, 20);
+        HBox firsthb = new HBox(10);
+        firsthb.setAlignment(Pos.CENTER);
+        firsthb.getChildren().add(firstbtn);
+        grid.add(firsthb, 0, 1);
+
+        firstbtn.setOnAction(new EventHandler<ActionEvent>() { 
+            @Override
+            public void handle(ActionEvent e) {
+                ((Node)(e.getSource())).getScene().getWindow().hide();
+                shanesProperties();
+            }
+        
+        });
+
         Button backbtn  = new Button("Back");
         backbtn.setPrefSize(60, 20);
         HBox backhb = new HBox(10);
@@ -671,6 +705,22 @@ public class App extends Application {
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 10));
         grid.add(scenetitle, 0, 0, 2, 1);
         
+        Button newbtn  = new Button("Create New");
+        newbtn.setPrefSize(60, 20);
+        HBox newhb = new HBox(10);
+        newhb.setAlignment(Pos.CENTER);
+        newhb.getChildren().add(newbtn);
+        grid.add(newhb, 0, 1);
+
+        newbtn.setOnAction(new EventHandler<ActionEvent>() { 
+            @Override
+            public void handle(ActionEvent e) {
+                ((Node)(e.getSource())).getScene().getWindow().hide();
+                addNewAdminScreen();
+            }
+        
+        });
+
         Button backbtn  = new Button("Back");
         backbtn.setPrefSize(60, 20);
         HBox backhb = new HBox(10);
@@ -741,6 +791,24 @@ public class App extends Application {
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 10));
         grid.add(scenetitle, 0, 0, 2, 1);
         
+
+        Button remOwnerbtn  = new Button("Remove");
+        remOwnerbtn.setPrefSize(60, 20);
+        HBox remOwnerhb = new HBox(10);
+        remOwnerhb.setAlignment(Pos.CENTER);
+        remOwnerhb.getChildren().add(remOwnerbtn);
+        grid.add(remOwnerhb, 0, 1);
+
+        remOwnerbtn.setOnAction(new EventHandler<ActionEvent>() { 
+            @Override
+            public void handle(ActionEvent e) {
+                ((Node)(e.getSource())).getScene().getWindow().hide();
+                removeOwnerScreen();
+            }
+        
+        });
+
+
         Button backbtn  = new Button("Back");
         backbtn.setPrefSize(60, 20);
         HBox backhb = new HBox(10);
@@ -762,5 +830,253 @@ public class App extends Application {
         removeUserScreen.show();
     }
 
+    public void pickProperties() {
+        Stage pickProperties = new Stage();
+        pickProperties.setHeight(500);
+        pickProperties.setWidth(500);
+        pickProperties.setTitle("Pick A Property");
+        grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(1, 1, 25, 25));
+        scenetitle = new Text("Pick a house");
+        scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 10));
+        grid.add(scenetitle, 0, 0, 2, 1);
+
+        Label properties = new Label("14 Rose Street");
+        grid.add(properties, 0, 1);
+
+        Button pickbtn  = new Button("View");
+        pickbtn.setPrefSize(60, 20);
+        HBox pickhb = new HBox(10);
+        pickhb.setAlignment(Pos.CENTER);
+        pickhb.getChildren().add(pickbtn);
+        grid.add(pickhb, 1, 1);
+
+        pickbtn.setOnAction(new EventHandler<ActionEvent>() { 
+            @Override
+            public void handle(ActionEvent e) {
+                ((Node)(e.getSource())).getScene().getWindow().hide();
+                //propertyInfo();
+            }
+        });
+        Button backbtn  = new Button("Back");
+        backbtn.setPrefSize(60, 20);
+        HBox backhb = new HBox(10);
+        backhb.setAlignment(Pos.CENTER);
+        backhb.getChildren().add(backbtn);
+        grid.add(backhb, 0, 2);
+
+        backbtn.setOnAction(new EventHandler<ActionEvent>() { 
+            @Override
+            public void handle(ActionEvent e) {
+                ((Node)(e.getSource())).getScene().getWindow().hide();
+                ownerViewScreen();
+            }
+        });
+        scene = new Scene(grid, 300, 275);
+        pickProperties.setScene(scene);
+        pickProperties.show();
+    }
+
+    public void shanesProperties() {
+        Stage shanesProperties = new Stage();
+        shanesProperties.setHeight(500);
+        shanesProperties.setWidth(500);
+        shanesProperties.setTitle("Pick A Property");
+        grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(1, 1, 25, 25));
+        scenetitle = new Text("Pick a house");
+        scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 10));
+        grid.add(scenetitle, 0, 0, 2, 1);
+
+        Label properties = new Label("14 Rose Street");
+        grid.add(properties, 0, 1);
+
+        Button pickbtn  = new Button("View");
+        pickbtn.setPrefSize(60, 20);
+        HBox pickhb = new HBox(10);
+        pickhb.setAlignment(Pos.CENTER);
+        pickhb.getChildren().add(pickbtn);
+        grid.add(pickhb, 1, 1);
+
+        pickbtn.setOnAction(new EventHandler<ActionEvent>() { 
+            @Override
+            public void handle(ActionEvent e) {
+                ((Node)(e.getSource())).getScene().getWindow().hide();
+                propertyInfo();
+            }
+        });
+        Button backbtn  = new Button("Back");
+        backbtn.setPrefSize(60, 20);
+        HBox backhb = new HBox(10);
+        backhb.setAlignment(Pos.CENTER);
+        backhb.getChildren().add(backbtn);
+        grid.add(backhb, 0, 2);
+
+        backbtn.setOnAction(new EventHandler<ActionEvent>() { 
+            @Override
+            public void handle(ActionEvent e) {
+                ((Node)(e.getSource())).getScene().getWindow().hide();
+                ownerViewScreen();
+            }
+        });
+        scene = new Scene(grid, 300, 275);
+        shanesProperties.setScene(scene);
+        shanesProperties.show();
+    }
+
+    
+    public void propertyInfo() {
+        Stage propertyInfo = new Stage();
+        propertyInfo.setHeight(500);
+        propertyInfo.setWidth(500);
+        propertyInfo.setTitle("14 Rose Street");
+        grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(1, 1, 25, 25));
+        scenetitle = new Text("Pick a house");
+        scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 10));
+        grid.add(scenetitle, 0, 0, 2, 1);
+
+        Label property = new Label("address,eircode,value,location,private/public,year");
+        grid.add(property, 0, 1);
+
+        Button backbtn  = new Button("Back");
+        backbtn.setPrefSize(60, 20);
+        HBox backhb = new HBox(10);
+        backhb.setAlignment(Pos.CENTER);
+        backhb.getChildren().add(backbtn);
+        grid.add(backhb, 0, 2);
+
+        backbtn.setOnAction(new EventHandler<ActionEvent>() { 
+            @Override
+            public void handle(ActionEvent e) {
+                ((Node)(e.getSource())).getScene().getWindow().hide();
+                shanesProperties();
+            }
+        });
+
+        scene = new Scene(grid, 300, 275);
+        propertyInfo.setScene(scene);
+        propertyInfo.show();
+    }
+
+    public void addNewAdminScreen() {
+        Stage addAdmin = new Stage();
+        addAdmin.setHeight(500);
+        addAdmin.setWidth(500);
+        addAdmin.setTitle("Create a new Admin");
+        grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(1, 1, 25, 25));
+        scenetitle = new Text("Enter the Admin you wish to create");
+        scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 10));
+        grid.add(scenetitle, 0, 0, 2, 1);
+
+        Label property = new Label("Name: ");
+        grid.add(property, 0, 1);
+
+        TextField userToRemove = new TextField();
+        grid.add(userToRemove, 1, 1);
+
+        Button enterbtn  = new Button("Enter");
+        enterbtn.setPrefSize(60, 20);
+        HBox enterhb = new HBox(10);
+        enterhb.setAlignment(Pos.CENTER);
+        enterhb.getChildren().add(enterbtn);
+        grid.add(enterhb, 0, 2);
+
+        enterbtn.setOnAction(new EventHandler<ActionEvent>() { 
+            @Override
+            public void handle(ActionEvent e) {
+                ((Node)(e.getSource())).getScene().getWindow().hide();
+                adminScreen();
+            }
+        });
+
+        Button backbtn  = new Button("Back");
+        backbtn.setPrefSize(60, 20);
+        HBox backhb = new HBox(10);
+        backhb.setAlignment(Pos.CENTER);
+        backhb.getChildren().add(backbtn);
+        grid.add(backhb, 1, 2);
+
+        backbtn.setOnAction(new EventHandler<ActionEvent>() { 
+            @Override
+            public void handle(ActionEvent e) {
+                ((Node)(e.getSource())).getScene().getWindow().hide();
+                adminScreen();
+            }
+        });
+
+        scene = new Scene(grid, 300, 275);
+        addAdmin.setScene(scene);
+        addAdmin.show();
+    }
+
+
+    public void removeOwnerScreen() {
+        Stage removeOwner = new Stage();
+        removeOwner.setHeight(500);
+        removeOwner.setWidth(500);
+        removeOwner.setTitle("Remove a User");
+        grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(1, 1, 25, 25));
+        scenetitle = new Text("Enter the User name you wish to Remove");
+        scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 10));
+        grid.add(scenetitle, 0, 0, 2, 1);
+
+        Label property = new Label("Name: ");
+        grid.add(property, 0, 1);
+
+        TextField userToRemove = new TextField();
+        grid.add(userToRemove, 0, 2);
+
+        Button enterbtn  = new Button("Enter");
+        enterbtn.setPrefSize(60, 20);
+        HBox enterhb = new HBox(10);
+        enterhb.setAlignment(Pos.CENTER);
+        enterhb.getChildren().add(enterbtn);
+        grid.add(enterhb, 1, 2);
+
+        enterbtn.setOnAction(new EventHandler<ActionEvent>() { 
+            @Override
+            public void handle(ActionEvent e) {
+                ((Node)(e.getSource())).getScene().getWindow().hide();
+                adminScreen();
+            }
+        });
+
+        Button backbtn  = new Button("Back");
+        backbtn.setPrefSize(60, 20);
+        HBox backhb = new HBox(10);
+        backhb.setAlignment(Pos.CENTER);
+        backhb.getChildren().add(backbtn);
+        grid.add(backhb, 0, 3);
+
+        backbtn.setOnAction(new EventHandler<ActionEvent>() { 
+            @Override
+            public void handle(ActionEvent e) {
+                ((Node)(e.getSource())).getScene().getWindow().hide();
+                adminScreen();
+            }
+        });
+
+        scene = new Scene(grid, 300, 275);
+        removeOwner.setScene(scene);
+        removeOwner.show();
+    }
 
 }
