@@ -1,8 +1,6 @@
 
 import java.util.ArrayList;
 
-
-
 //The main purpose of this class is to return the 
 public class Owners {
 	/**
@@ -20,40 +18,42 @@ public class Owners {
 	 */
 	private ArrayList<Owner> ownerDetails;
 	public String ownersProperties = "";
-	public Owners(){
+
+	public Owners() {
 		ownerDetails = new ArrayList<Owner>();
 	}
-	
-	public void addOwner(Owner o){
+
+	public void addOwner(Owner o) {
 		boolean exists = false;
-		for (int i = 0; i <ownerDetails.size(); i++){
-			if (ownerDetails.get(i) == o){
+		for (int i = 0; i < ownerDetails.size(); i++) {
+			if (ownerDetails.get(i) == o) {
 				exists = true;
 			}
 		}
-		if (exists == false){
+		if (exists == false) {
 			ownerDetails.add(o);
 		}
-		
+
 	}
-	public String getOwner(String name){
+
+	public String getOwner(String name) {
 		String temp = null;
-		for (int i = 0; i <ownerDetails.size(); i++){
-			if (ownerDetails.get(i).getName() ==name){
+		for (int i = 0; i < ownerDetails.size(); i++) {
+			if (ownerDetails.get(i).getName() == name) {
 				temp = ownerDetails.get(i).toString();
 			}
 		}
 		return temp;
 	}
-	
-	public void removeOwner(Owner o){
-		for (int i = 0; i <ownerDetails.size(); i++){
-			if (ownerDetails.get(i) == o){
+
+	public void removeOwner(Owner o) {
+		for (int i = 0; i < ownerDetails.size(); i++) {
+			if (ownerDetails.get(i) == o) {
 				ownerDetails.remove(i);
 			}
 		}
 	}
-	
+
 	public String getOwnersProperties() {
 		for (int i = 0; i < ownerDetails.size(); i++) {
 			Owner o = ownerDetails.get(i);
@@ -61,13 +61,27 @@ public class Owners {
 		}
 		return ownersProperties;
 	}
-	
+
 	public ArrayList<Owner> getOwnerDetails() {
 		return ownerDetails;
 	}
-	
-	public String toString(){
-		return(ownerDetails.toString()).replace("[", "").replace("]", "").replace(",", "");
+
+	public String taxesPaidYear(int year) {
+		ArrayList<Tax> temp = new ArrayList<Tax>();
+		for (int k = 0; k < ownerDetails.size(); k++) {
+			for (int i = 0; i < ownerDetails.get(k).getPropertiesOwned().size(); i++) {
+				for (int j = 0; j < propertiesOwned.get(i).getTaxes().size(); j++) {
+					if (propertiesOwned.get(i).getTaxes().get(j).getYear() == year) {
+						temp.add(propertiesOwned.get(i).getTaxes().get(j));
+					}
+				}
+			}
+		}
+		return (temp.toString()).replace("[", "").replace("]", "").replace(",", "");
 	}
-		
+
+	public String toString() {
+		return (ownerDetails.toString()).replace("[", "").replace("]", "").replace(",", "");
+	}
+
 }
