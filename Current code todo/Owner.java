@@ -63,7 +63,7 @@ public class Owner{
 		String temp = null;
 		for (int i = 0; i < propertiesOwned.size(); i++) {
 			if (propertiesOwned.get(i).getAddress() == address) {
-				temp = propertiesOwned.get(i).toString();
+				temp = propertiesOwned.get(i).PropertywithTaxToString();
 			}
 		}
 		return temp;
@@ -79,6 +79,7 @@ public class Owner{
 	public ArrayList<Property> getPropertiesArray() {
 		return propertiesOwned;
 	}
+	
 	
 	public String getAllDetails() {
 		return ownerToString();
