@@ -338,24 +338,24 @@ public class App extends Application {
             @Override
             public void handle(ActionEvent e) {
             	((Node)(e.getSource())).getScene().getWindow().hide();
-                //getProperties();
+                singlePropertyScreen();
             }
         });
         Label ownerView = new Label("View an owner");
         grid.add(ownerView, 0, 3);
 
-        Button propbtn  = new Button("View");
-        propbtn.setPrefSize(60, 20);
-        HBox prophb = new HBox(10);
-        prophb.setAlignment(Pos.CENTER);
-        prophb.getChildren().add(propbtn);
-        grid.add(prophb, 1, 3);   
+        Button ownbtn  = new Button("View");
+        ownbtn.setPrefSize(60, 20);
+        HBox ownhb = new HBox(10);
+        ownhb.setAlignment(Pos.CENTER);
+        ownhb.getChildren().add(ownbtn);
+        grid.add(ownhb, 1, 3);   
         
-        propbtn.setOnAction(new EventHandler<ActionEvent>() { 
+        ownbtn.setOnAction(new EventHandler<ActionEvent>() { 
             @Override
             public void handle(ActionEvent e) {
             	((Node)(e.getSource())).getScene().getWindow().hide();
-                //getProperty();
+                ownerViewScreen();
             }
         });
         Label overDueYear = new Label("See overdue tax year");
@@ -372,7 +372,7 @@ public class App extends Application {
             @Override
             public void handle(ActionEvent e) {
             	((Node)(e.getSource())).getScene().getWindow().hide();
-                //payTax();
+                overdueViewScreen();
             }
         });
 
@@ -390,7 +390,7 @@ public class App extends Application {
             @Override
             public void handle(ActionEvent e) {
             	((Node)(e.getSource())).getScene().getWindow().hide();
-                //payTax();
+                statViewScreen();
             }
         });
 
@@ -408,7 +408,7 @@ public class App extends Application {
             @Override
             public void handle(ActionEvent e) {
             	((Node)(e.getSource())).getScene().getWindow().hide();
-                //addProperty();
+                addAdminScreen();
             }
         });
 
@@ -426,7 +426,7 @@ public class App extends Application {
             @Override
             public void handle(ActionEvent e) {
             	((Node)(e.getSource())).getScene().getWindow().hide();
-                //addProperty();
+                addUserScreen();
             }
         });
 
@@ -444,7 +444,7 @@ public class App extends Application {
             @Override
             public void handle(ActionEvent e) {
             	((Node)(e.getSource())).getScene().getWindow().hide();
-                //addProperty();
+                removeUserScreen();
             }
         });
 
@@ -517,5 +517,250 @@ public class App extends Application {
     }
 
 
+    public void singlePropertyScreen(){
+    	Stage singlePropertyScreen = new Stage();
+    	singlePropertyScreen.setHeight(500);
+        singlePropertyScreen.setWidth(500);
+        singlePropertyScreen.setTitle("Property Charge Management System");
+        grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(1, 1, 25, 25));
+        scenetitle = new Text("View a single property");
+        scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 10));
+        grid.add(scenetitle, 0, 0, 2, 1);
+        
+        Button backbtn  = new Button("Back");
+        backbtn.setPrefSize(60, 20);
+        HBox backhb = new HBox(10);
+        backhb.setAlignment(Pos.CENTER);
+        backhb.getChildren().add(backbtn);
+        grid.add(backhb, 0, 17);
+
+        backbtn.setOnAction(new EventHandler<ActionEvent>() { 
+            @Override
+            public void handle(ActionEvent e) {
+                ((Node)(e.getSource())).getScene().getWindow().hide();
+                adminScreen();
+            }
+        
+        });
+
+        scene = new Scene(grid, 300, 275);
+        singlePropertyScreen.setScene(scene);
+        singlePropertyScreen.show();
+    }
+
+    public void ownerViewScreen(){
+    	Stage ownerViewScreen = new Stage();
+    	ownerViewScreen.setHeight(500);
+        ownerViewScreen.setWidth(500);
+        ownerViewScreen.setTitle("Property Charge Management System");
+        grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(1, 1, 25, 25));
+        scenetitle = new Text("View properties of an Owner");
+        scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 10));
+        grid.add(scenetitle, 0, 0, 2, 1);
+        
+        Button backbtn  = new Button("Back");
+        backbtn.setPrefSize(60, 20);
+        HBox backhb = new HBox(10);
+        backhb.setAlignment(Pos.CENTER);
+        backhb.getChildren().add(backbtn);
+        grid.add(backhb, 0, 17);
+
+        backbtn.setOnAction(new EventHandler<ActionEvent>() { 
+            @Override
+            public void handle(ActionEvent e) {
+                ((Node)(e.getSource())).getScene().getWindow().hide();
+                adminScreen();
+            }
+        
+        });
+
+        scene = new Scene(grid, 300, 275);
+        ownerViewScreen.setScene(scene);
+        ownerViewScreen.show();
+    }
+
+    public void overdueViewScreen(){
+    	Stage overdueViewScreen = new Stage();
+    	overdueViewScreen.setHeight(500);
+        overdueViewScreen.setWidth(500);
+        overdueViewScreen.setTitle("Property Charge Management System");
+        grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(1, 1, 25, 25));
+        scenetitle = new Text("View overdue tax");
+        scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 10));
+        grid.add(scenetitle, 0, 0, 2, 1);
+        
+        Button backbtn  = new Button("Back");
+        backbtn.setPrefSize(60, 20);
+        HBox backhb = new HBox(10);
+        backhb.setAlignment(Pos.CENTER);
+        backhb.getChildren().add(backbtn);
+        grid.add(backhb, 0, 17);
+
+        backbtn.setOnAction(new EventHandler<ActionEvent>() { 
+            @Override
+            public void handle(ActionEvent e) {
+                ((Node)(e.getSource())).getScene().getWindow().hide();
+                adminScreen();
+            }
+        
+        });
+
+        scene = new Scene(grid, 300, 275);
+        overdueViewScreen.setScene(scene);
+        overdueViewScreen.show();
+    }
+
+    public void statViewScreen(){
+    	Stage statViewScreen = new Stage();
+    	statViewScreen.setHeight(500);
+        statViewScreen.setWidth(500);
+        statViewScreen.setTitle("Property Charge Management System");
+        grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(1, 1, 25, 25));
+        scenetitle = new Text("View statistics for a given area");
+        scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 10));
+        grid.add(scenetitle, 0, 0, 2, 1);
+        
+        Button backbtn  = new Button("Back");
+        backbtn.setPrefSize(60, 20);
+        HBox backhb = new HBox(10);
+        backhb.setAlignment(Pos.CENTER);
+        backhb.getChildren().add(backbtn);
+        grid.add(backhb, 0, 17);
+
+        backbtn.setOnAction(new EventHandler<ActionEvent>() { 
+            @Override
+            public void handle(ActionEvent e) {
+                ((Node)(e.getSource())).getScene().getWindow().hide();
+                adminScreen();
+            }
+        
+        });
+
+        scene = new Scene(grid, 300, 275);
+        statViewScreen.setScene(scene);
+        statViewScreen.show();
+    }
+
+    public void addAdminScreen(){
+    	Stage addAdminScreen = new Stage();
+    	addAdminScreen.setHeight(500);
+        addAdminScreen.setWidth(500);
+        addAdminScreen.setTitle("Property Charge Management System");
+        grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(1, 1, 25, 25));
+        scenetitle = new Text("Create a new Admin");
+        scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 10));
+        grid.add(scenetitle, 0, 0, 2, 1);
+        
+        Button backbtn  = new Button("Back");
+        backbtn.setPrefSize(60, 20);
+        HBox backhb = new HBox(10);
+        backhb.setAlignment(Pos.CENTER);
+        backhb.getChildren().add(backbtn);
+        grid.add(backhb, 0, 17);
+
+        backbtn.setOnAction(new EventHandler<ActionEvent>() { 
+            @Override
+            public void handle(ActionEvent e) {
+                ((Node)(e.getSource())).getScene().getWindow().hide();
+                adminScreen();
+            }
+        
+        });
+
+        scene = new Scene(grid, 300, 275);
+        addAdminScreen.setScene(scene);
+        addAdminScreen.show();
+    }
+
+    public void addUserScreen(){
+    	Stage addUserScreen = new Stage();
+    	addUserScreen.setHeight(500);
+        addUserScreen.setWidth(500);
+        addUserScreen.setTitle("Property Charge Management System");
+        grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(1, 1, 25, 25));
+        scenetitle = new Text("Create a new User");
+        scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 10));
+        grid.add(scenetitle, 0, 0, 2, 1);
+        
+        Button backbtn  = new Button("Back");
+        backbtn.setPrefSize(60, 20);
+        HBox backhb = new HBox(10);
+        backhb.setAlignment(Pos.CENTER);
+        backhb.getChildren().add(backbtn);
+        grid.add(backhb, 0, 17);
+
+        backbtn.setOnAction(new EventHandler<ActionEvent>() { 
+            @Override
+            public void handle(ActionEvent e) {
+                ((Node)(e.getSource())).getScene().getWindow().hide();
+                adminScreen();
+            }
+        
+        });
+
+        scene = new Scene(grid, 300, 275);
+        addUserScreen.setScene(scene);
+        addUserScreen.show();
+    }
+
+    public void removeUserScreen(){
+    	Stage removeUserScreen = new Stage();
+    	removeUserScreen.setHeight(500);
+        removeUserScreen.setWidth(500);
+        removeUserScreen.setTitle("Property Charge Management System");
+        grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(1, 1, 25, 25));
+        scenetitle = new Text("Remove a User");
+        scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 10));
+        grid.add(scenetitle, 0, 0, 2, 1);
+        
+        Button backbtn  = new Button("Back");
+        backbtn.setPrefSize(60, 20);
+        HBox backhb = new HBox(10);
+        backhb.setAlignment(Pos.CENTER);
+        backhb.getChildren().add(backbtn);
+        grid.add(backhb, 0, 17);
+
+        backbtn.setOnAction(new EventHandler<ActionEvent>() { 
+            @Override
+            public void handle(ActionEvent e) {
+                ((Node)(e.getSource())).getScene().getWindow().hide();
+                adminScreen();
+            }
+        
+        });
+
+        scene = new Scene(grid, 300, 275);
+        removeUserScreen.setScene(scene);
+        removeUserScreen.show();
+    }
+
+
 }
-    
