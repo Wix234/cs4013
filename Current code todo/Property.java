@@ -1,8 +1,8 @@
 
 
+import java.time.LocalDate;
 import java.time.Year;
 import java.util.ArrayList;
-
 
 public class Property{
 		private String address;
@@ -12,7 +12,9 @@ public class Property{
 		private boolean privResidence;
 		private int yearBought;
 		private int curYear = Year.now().getValue();
-		private ArrayList<Tax> taxes;
+		private ArrayList<Tax> taxes = new ArrayList<Tax>();
+		private ArrayList<Tax> taxesDue = new ArrayList<Tax>();
+		private ArrayList<Tax> taxesPaid = new ArrayList<Tax>();
 		private String name;
 		
 		public Property(String name, String address, String eircode, double estMarketVal,String located, String privateResidence, int yearBought){
@@ -23,7 +25,6 @@ public class Property{
 			setPrivResidence(privateResidence);
 			setYearBought(yearBought);
 			setName(name);
-			taxes = new ArrayList<Tax>();
 			defaultTax();
 		}
 		
@@ -98,16 +99,41 @@ public class Property{
 					taxes.set(i, t);
 				}
 			}
+			if (t.isPaid() == false) {
+				taxesDue.add(t);
+			} 
 		}
-		public void payTax(int year) {
-			for (int i = 0; i < taxes.size(); i++) {
-				if (year == taxes.get(i).getYear()) {
-					taxes.get(i).setPaid(true);
+		//new method
+		public void organiseTaxes(){
+			for (int i = 0; i < taxesDue.size(); i++){
+				if (taxesDue.get(i).isPaid() != false){
+					taxesPaid.add(taxes.get(i));
+					taxesDue.remove(taxes.get(i));
 				}
 			}
 		}
-		
-		public String toString(){	
+		//new method
+		public void payTax(Tax t){
+			for (int i = 0; i < taxes.size(); i++){
+				if (taxes.get(i).getP().getAddress() == t.getP().getAddress() && taxes.get(i).getYear() == t.getYear()){
+					taxesDue.remove(t);
+					taxes.get(i).setPaid(true);
+					taxes.get(i).setYearPaid(curYear);
+					taxesPaid.add(t);
+				}
+			}
+		}
+		public ArrayList<Tax> getTaxesPaid(){
+			return taxesPaid;
+		}
+		public ArrayList<Tax> getTaxes(){
+			return taxes;
+		}
+		public ArrayList<Tax> getOverDueTax(){
+			return taxesDue;
+		}
+		//new method
+		public String PropertywithTaxToString(){
 			String temp;
 			if (privResidence == true){
 				temp = "Yes";
@@ -128,10 +154,33 @@ public class Property{
 			}
 			return ("Address:\n" + address + "\n" + eircode + "\nEstimated market value: " + estMarketVal
 					+ "\nLocation type: " + temp2 + "\nPrinciple private Residence: " + temp + "\nYear Bought: "  
-					+ yearBought + "\n\nTax Information:\n" + taxes + "\n").replace("[", "").replace("]", "").replace(",", "");
+					+ yearBought + "\n\nAll tax information:\n" + taxes 
+					+ "\n").replace("[", "").replace("]", "").replace(",", "");
 		}
-
-		
+		public String toString(){	
+			organiseTaxes();
+			String temp;
+			if (privResidence == true){
+				temp = "Yes";
+			}else {
+				temp = "No";
+			}
+			String temp2 = null;
+			if(location == 1){
+				temp2 = "City";
+			}else if(location == 2){
+				temp2 = "Large town";
+			}else if(location == 3){
+				temp2 = "Small town";
+			}else if(location == 4){
+				temp2 = "Village";
+			}else if(location == 5){
+				temp2 = "Countryside";
+			}
+			return ("Address:\n" + address + "\n" + eircode + "\nEstimated market value: " + estMarketVal
+					+ "\nLocation type: " + temp2 + "\nPrinciple private Residence: " + temp + "\nYear Bought: "  
+					+ yearBought + "\n\nTax Due and Overdue:\n" + taxesDue + "\n").replace("[", "").replace("]", "").replace(",", "");
+		}
 
 
 }
