@@ -1,16 +1,50 @@
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.Year;
 public class TaxCal {
 	private double fixedTax = 100;
 	private double marketVal;
-	private double location;
+	private int location;
 	private boolean privateResidence;
 	private double totalTax;
+	private int year;
+	private boolean paid;
+	private int curYear = Year.now().getValue();
+	private int yearPaid;
 	
+	public TaxCal(Property p, int year, boolean paid, int yearPaid){
+		if (p != null) {
+			marketVal = p.getEstMarketVal();
+			location = p.getLocation();
+			privateResidence = p.isPrivResidence();
+		}else {
+			marketVal = 0;
+			location = 0;
+			privateResidence = false;
+		}
+		setYear(year);
+		setPaid(paid);
+		setYearPaid(yearPaid);
+	}
 	
-	public TaxCal(Property p){
-		marketVal = p.getEstMarketVal();
-		location = p.getLocation();
-		privateResidence = p.isPrivateResidence();
+	public void setYear(int year) {
+		this.year = year;
+	}
+	public int getYear() {
+		return year;
+	}
+	public boolean isPaid() {
+		return paid;
+	}
+	public void setPaid(boolean paid) {
+		this.paid = paid;
+	}
+	public int getYearPaid() {
+		return yearPaid;
+	}
+	public void setYearPaid(int yearPaid) {
+		this.yearPaid = yearPaid;
 	}
 
 	public double estMarketValTax(){
@@ -44,7 +78,6 @@ public class TaxCal {
 	}
 	
 	public double residenceTax(){
-
 		double privateResTax;	
 		if (privateResidence == true){
 				privateResTax = 100;
@@ -55,14 +88,30 @@ public class TaxCal {
 		return privateResTax;
 	}
 	
-	public double getTotalTax(Property p){
+	public String getTotalTax(Property p){
+		double temp = (fixedTax + taxLocation() + estMarketValTax()  + residenceTax());
 		totalTax = (fixedTax + taxLocation() + estMarketValTax()  + residenceTax());
-		return totalTax;
+		int count = 0;
+		if (yearPaid == 0 && p != null) {
+			count = curYear - year;
+		}else {
+			count = yearPaid - year;
+		}
+		for (int i = 0; i < count; i++){
+			totalTax = totalTax + (totalTax * 0.07);
+		}
+		BigDecimal twoPoints1 = new BigDecimal(totalTax).setScale(2, RoundingMode.HALF_UP);
+		totalTax = twoPoints1.doubleValue();
+		temp = totalTax - temp;
+		BigDecimal twoPoints2 = new BigDecimal(temp).setScale(2, RoundingMode.HALF_UP);
+		temp = twoPoints2.doubleValue();
+		String str;
+		if (p != null) {
+			str = ("FT:" + fixedTax  + " | MT:" + estMarketValTax() + " | TL:" + taxLocation() + " | PR:" + residenceTax() + " | Overdue : "
+				+ temp + " | Total tax: " + totalTax).replace("[", "").replace("]", "").replace(",", "");
+		}else {
+			str = "Missing information on cvs sheet.";
+		}
+		return str;
 	}
-	
-	
-	public String taxInformation(){
-		return ("FT:" + fixedTax  + " | MT:" + marketVal + " | TL:" + location + " | PR:" + privateResidence);
-	}
-	
 }
