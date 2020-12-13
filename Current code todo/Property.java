@@ -1,8 +1,9 @@
 
 
+
+import java.time.LocalDate;
 import java.time.Year;
 import java.util.ArrayList;
-
 
 public class Property{
 		private String address;
@@ -13,7 +14,9 @@ public class Property{
 		private int yearBought;
 		private int curYear = Year.now().getValue();
 		private ArrayList<Tax> taxes;
+		private ArrayList<Tax> taxesDue = new ArrayList<Tax>();;
 		private String name;
+		private ArrayList<Payments> paymentsMade = new ArrayList<Payments>() ;
 		
 		public Property(String name, String address, String eircode, double estMarketVal,String located, String privateResidence, int yearBought){
 			setAddress(address);
@@ -24,7 +27,7 @@ public class Property{
 			setYearBought(yearBought);
 			setName(name);
 			taxes = new ArrayList<Tax>();
-			defaultTax();
+			defaultTax();	
 		}
 		
 		public String getName() {
@@ -99,15 +102,40 @@ public class Property{
 				}
 			}
 		}
-		public void payTax(int year) {
-			for (int i = 0; i < taxes.size(); i++) {
-				if (year == taxes.get(i).getYear()) {
-					taxes.get(i).setPaid(true);
+		//new method
+		public void getTaxDue(){
+			for (int i = 0; i < taxes.size(); i++){
+				if (taxes.get(i).getYearPaid() == 0){
+					taxesDue.add(taxes.get(i));
 				}
 			}
 		}
-		
-		public String toString(){	
+		//new method
+		public void defualtPayment(){
+			for (int i = yearBought; i < curYear; i++){
+				Payments p = new Payments(getAddress(),i);
+				paymentsMade.add(p);
+			}
+			
+		}
+		//new method
+		public void makeAPayment(Tax t){
+			//double tax = 0;
+			for (int i = 0; i < taxes.size(); i++){
+				if (taxes.get(i).getP().getAddress() == t.getP().getAddress() && taxes.get(i).getYear() == t.getYear()){
+					//tax = taxes.get(i).getTotalTax((taxes.get(i).getP()));
+					taxes.get(i).setPaid(true);
+				}
+			}
+			//Payments payment = new Payments(address, year , tax, amount, yearPaid);
+			//paymentsMade.add(payment);	
+		}
+		public ArrayList<Tax> getOverDueTax(){
+			getTaxDue();
+			return taxesDue;
+		}
+		//new method
+		public String PropertywithTaxToString(){
 			String temp;
 			if (privResidence == true){
 				temp = "Yes";
@@ -128,7 +156,32 @@ public class Property{
 			}
 			return ("Address:\n" + address + "\n" + eircode + "\nEstimated market value: " + estMarketVal
 					+ "\nLocation type: " + temp2 + "\nPrinciple private Residence: " + temp + "\nYear Bought: "  
-					+ yearBought + "\n\nTax Information:\n" + taxes + "\n").replace("[", "").replace("]", "").replace(",", "");
+					+ yearBought + "\n\nAll tax information:\n" + taxes 
+					+ "\n").replace("[", "").replace("]", "").replace(",", "");
+		}
+		public String toString(){	
+			getTaxDue();
+			String temp;
+			if (privResidence == true){
+				temp = "Yes";
+			}else {
+				temp = "No";
+			}
+			String temp2 = null;
+			if(location == 1){
+				temp2 = "City";
+			}else if(location == 2){
+				temp2 = "Large town";
+			}else if(location == 3){
+				temp2 = "Small town";
+			}else if(location == 4){
+				temp2 = "Village";
+			}else if(location == 5){
+				temp2 = "Countryside";
+			}
+			return ("Address:\n" + address + "\n" + eircode + "\nEstimated market value: " + estMarketVal
+					+ "\nLocation type: " + temp2 + "\nPrinciple private Residence: " + temp + "\nYear Bought: "  
+					+ yearBought + "\n\nTax Due and Overdue:\n" + taxesDue + "\n").replace("[", "").replace("]", "").replace(",", "");
 		}
 
 		
