@@ -9,4 +9,7 @@ I have created a very basic GUI by following a tutorial. (All it contains is a s
 
 GUI Progress update.
 I still need to get the packages to run the code but now the GUI should be able to handle a user interaction of clicking the button, printing "Hello World" in the terminal.
-I plan to progress with this and combine it with out lectures. -21/11/20
+I plan to progress with this and combine it with out lectures. - Ben 21/11/20
+
+GUI Progress update.
+I have created a near functional GUI that should be compatible with the methods written in the classes with some adjustments. The GUI currently has a single step log in like the code that will need some changes, and with some assistance external methods in theory can aid in the creation of the final GUI that we present. - Ben 13/12/20
