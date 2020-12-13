@@ -1,11 +1,11 @@
 
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,14 +23,18 @@ public class Main {
 	        readTaxesFromCSV();
 	        addProperties();
 	        addTaxes();
-	        
-	        //System.out.println(owner.toString());
-	        //System.out.println(properties.toString());
 	        OwnersScreen menu = new OwnersScreen();
-			menu.run(owner);
+			menu.login(owner);
+			launch(args);
+			
 	    }
     
-	    private static void readOwnersFromCSV() {
+	    private static void launch(String[] args) {
+	    	launch(args);
+		
+	}
+
+		private static void readOwnersFromCSV() {
 	        String csvFile = "Owners.csv";
 	        Path pathToFile = Paths.get(csvFile);
 	        try (BufferedReader br = Files.newBufferedReader(pathToFile)) {
