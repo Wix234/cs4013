@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 
 
@@ -61,7 +60,6 @@ public class Owners {
 		}
 		return ownersProperties;
 	}
-	
 	public ArrayList<Owner> getOwnerDetails() {
 		return ownerDetails;
 	}
@@ -69,5 +67,13 @@ public class Owners {
 	public String toString(){
 		return(ownerDetails.toString()).replace("[", "").replace("]", "").replace(",", "");
 	}
-		
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
