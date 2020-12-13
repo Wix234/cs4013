@@ -1,11 +1,11 @@
 
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,15 +15,18 @@ public class Main {
 	static List<Owner> owners = new ArrayList<>();
 	static List<Property> properties = new ArrayList<>();
 	static List<Tax> taxes = new ArrayList<>();
+	static List<Payments> payments = new ArrayList<>();
 	private static Owners owner; 
 	public static void main(String[] args) throws IOException {
 	        owner = new Owners();
 	        readOwnersFromCSV();
 	        readPropertiesFromCSV();
 	        readTaxesFromCSV();
+	       // readPayemtsFromCSV();
 	        addProperties();
+	       // addPayment();
 	        addTaxes();
-	        
+	        //System.out.println(payments.toString());
 	        //System.out.println(owner.toString());
 	        //System.out.println(properties.toString());
 	        OwnersScreen menu = new OwnersScreen();
@@ -130,5 +133,41 @@ public class Main {
 	        }
 	        return new Tax(p, year, yearPaid);
 	    }    
+	    /*private static void readPayemtsFromCSV() {
+	        String csvFile = "payments.csv";
+	        Path pathToFile = Paths.get(csvFile);
+	        try (BufferedReader br = Files.newBufferedReader(pathToFile)) {
+	            String line = br.readLine();
+	            while (line != null) {
+	                String[] attributes = line.split(",");
+	                Payments temp = createPayment(attributes);
+	                payments.add(temp);
+	                line = br.readLine();
+	            }
+	        } catch (IOException ioe) {
+	            ioe.printStackTrace();
+	        }
+	    }
+	    public static void addPayment(){
+	    	for (int i = 0; i < taxes.size(); i ++ ){
+    			for (int j = 0; j < payments.size(); j ++ ){
+    				if (payments.get(i).getAddress().equalsIgnoreCase(taxes.get(j).getP().getAddress()) && payments.get(i).getYear() == taxes.get(j).getYear() ){
+    					System.out.println(properties.get(i));
+    					properties.get(i).makeAPayment(payments.get(i).getAddress(), payments.get(i).getYear(), payments.get(i).getPaid(), payments.get(i).getYearPaid());
+    				}	else{
+    					System.out.println("bloop");
+    				}
+    			}
+	    	}
+	    }
+	    private static Payments createPayment(String[] details) {
+	    	String address = details[0];
+	    	int year = Integer.parseInt(details[1]);
+	    	double due = Double.parseDouble(details[2]);
+	    	double paid = Double.parseDouble(details[3]);
+	        int yearPaid = Integer.parseInt(details[4]);
+	       
+	        return new Payments(address, year, due, paid, yearPaid);
+	    }   */ 
 
 }
